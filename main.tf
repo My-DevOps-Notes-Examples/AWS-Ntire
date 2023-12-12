@@ -1,5 +1,5 @@
 resource "aws_vpc" "ntier" {
-  cidr_block = var.ntier-vpc-range
+  cidr_block = var.ntier_vpc_info.vpc_cidr
 
   tags = {
     Name = "ntier"
@@ -7,13 +7,13 @@ resource "aws_vpc" "ntier" {
 }
 
 resource "aws_subnet" "subnets" {
-  count             = length(var.subnets-names)
+  count             = length(var.ntier_vpc_info.subnets_names)
   vpc_id            = aws_vpc.ntier.id
-  cidr_block        = var.subnets-cidr[count.index]
-  availability_zone = "${var.region}${var.subnets-azs[count.index]}"
+  cidr_block        = cidrsubnet(var.ntier_vpc_info.vpc_cidr, 8, count.index)
+  availability_zone = "${var.region}${var.ntier_vpc_info.subnets_azs[count.index]}"
 
   tags = {
-    Name = var.subnets-names[count.index]
+    Name = var.ntier_vpc_info.subnets_names[count.index]
   }
 
   depends_on = [

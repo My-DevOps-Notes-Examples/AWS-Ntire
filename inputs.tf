@@ -4,23 +4,15 @@ variable "region" {
   description = "location to create resource"
 }
 
-variable "ntier-vpc-range" {
-  type        = string
-  default     = "192.168.0.0/16"
-  description = "VPC CIDR range"
-}
-
-variable "subnets-cidr" {
-  type    = list(string)
-  default = ["192.168.0.0/24", "192.168.1.0/24", "192.168.2.0/24", "192.168.3.0/24"]
-}
-
-variable "subnets-azs" {
-  type    = list(string)
-  default = ["a", "b", "a", "b"]
-}
-
-variable "subnets-names" {
-  type    = list(string)
-  default = ["app1", "app2", "db1", "db2"]
+variable "ntier_vpc_info" {
+  type = object({
+    vpc_cidr      = string
+    subnets_names = list(string)
+    subnets_azs   = list(string)
+  })
+  default = {
+    vpc_cidr      = "192.168.0.0/16"
+    subnets_names = ["app1", "app2", "db1", "db2"]
+    subnets_azs   = ["a", "b", "a", "b"]
+  }
 }

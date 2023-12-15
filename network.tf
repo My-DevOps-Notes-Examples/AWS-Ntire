@@ -20,3 +20,15 @@ resource "aws_subnet" "subnets" {
     aws_vpc.ntier
   ]
 }
+
+resource "aws_internet_gateway" "ntier_igw" {
+  vpc_id = aws_vpc.ntier.id
+
+  tags = {
+    Name = "ntier-igw"
+  }
+
+  depends_on = [
+    aws_subnet.subnets
+  ]
+}

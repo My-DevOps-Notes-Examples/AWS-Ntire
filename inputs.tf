@@ -13,6 +13,7 @@ variable "ntier_vpc_info" {
     igw_name        = string
     private_subnets = list(string)
     public_subnets  = list(string)
+    db_subnets      = list(string)
   })
   default = {
     vpc_name        = "ntier"
@@ -22,6 +23,7 @@ variable "ntier_vpc_info" {
     igw_name        = "ntier-igw"
     private_subnets = ["app1", "app2", "db1", "db2"]
     public_subnets  = []
+    db_subnets      = ["db1", "db2"]
   }
 }
 
@@ -37,5 +39,14 @@ variable "security_group" {
     port_number = 3306
     protocol    = "tcp"
     description = "allows mysql"
+  }
+}
+
+variable "database_info" {
+  type = object({
+    db_subnet_group_name = string
+  })
+  default = {
+    db_subnet_group_name = "ntier-db"
   }
 }

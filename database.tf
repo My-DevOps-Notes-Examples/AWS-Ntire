@@ -17,3 +17,16 @@ resource "aws_security_group" "mysql" {
     aws_subnet.subnets
   ]
 }
+
+resource "aws_db_subnet_group" "ntier_db" {
+  name       = var.database_info.db_subnet_group_name
+  subnet_ids = data.aws_subnets.db_subnets.ids
+
+  tags = {
+    Name = var.database_info.db_subnet_group_name
+  }
+
+  depends_on = [
+    aws_subnet.subnets
+  ]
+}

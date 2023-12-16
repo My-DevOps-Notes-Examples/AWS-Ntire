@@ -3,6 +3,10 @@ data "aws_subnets" "private" {
     name   = "tag:Name"
     values = var.ntier_vpc_info.private_subnets
   }
+
+  depends_on = [
+    aws_subnet.subnets
+  ]
 }
 
 data "aws_subnets" "public" {
@@ -10,4 +14,19 @@ data "aws_subnets" "public" {
     name   = "tag:Name"
     values = var.ntier_vpc_info.public_subnets
   }
+
+  depends_on = [
+    aws_subnet.subnets
+  ]
+}
+
+data "aws_subnets" "db_subnets" {
+  filter {
+    name   = "tag:Name"
+    values = var.ntier_vpc_info.db_subnets
+  }
+
+  depends_on = [
+    aws_subnet.subnets
+  ]
 }

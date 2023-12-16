@@ -8,3 +8,9 @@ ntier_vpc_info = {
   private_subnets = ["app1", "app2", "db1", "db2"]
   public_subnets  = ["web1", "web2"]
 }
+security_group = {
+  name        = "mysql"
+  port_number = 3306
+  protocol    = "tcp"
+  description = "allows mysql"
+}

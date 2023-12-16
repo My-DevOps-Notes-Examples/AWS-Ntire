@@ -24,3 +24,18 @@ variable "ntier_vpc_info" {
     public_subnets  = []
   }
 }
+
+variable "security_group" {
+  type = object({
+    name        = string
+    port_number = number
+    protocol    = string
+    description = string
+  })
+  default = {
+    name        = "mysql"
+    port_number = 3306
+    protocol    = "tcp"
+    description = "allows mysql"
+  }
+}

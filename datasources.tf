@@ -30,3 +30,15 @@ data "aws_subnets" "db_subnets" {
     aws_subnet.subnets
   ]
 }
+
+data "aws_ami_ids" "ubuntu_2204" {
+  owners = ["099720109477"]
+  filter {
+    name   = "description"
+    values = ["Canonical, Ubuntu, 22.04 LTS, amd64 jammy image build on 2023-09-19"]
+  }
+  filter {
+    name   = "is-public"
+    values = ["true"]
+  }
+}

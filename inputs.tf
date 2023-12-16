@@ -27,7 +27,7 @@ variable "ntier_vpc_info" {
   }
 }
 
-variable "security_group" {
+variable "mysql_security_group" {
   type = object({
     name        = string
     port_number = number

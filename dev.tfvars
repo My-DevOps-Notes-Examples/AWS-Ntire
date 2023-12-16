@@ -9,7 +9,7 @@ ntier_vpc_info = {
   public_subnets  = ["web1", "web2"]
   db_subnets      = ["db1", "db2"]
 }
-security_group = {
+mysql_security_group = {
   name        = "mysql"
   port_number = 3306
   protocol    = "tcp"

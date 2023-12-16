@@ -45,8 +45,16 @@ variable "security_group" {
 variable "database_info" {
   type = object({
     db_subnet_group_name = string
+    db_name              = string
+    db_engine            = string
+    db_engine_version    = string
+    db_instance_class    = string
   })
   default = {
     db_subnet_group_name = "ntier-db"
+    db_name              = "sureshempdatabase"
+    db_engine            = "mysql"
+    db_engine_version    = "8.0.33"
+    db_instance_class    = "db.t3.micro"
   }
 }

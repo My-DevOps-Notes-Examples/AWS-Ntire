@@ -17,4 +17,8 @@ security_group = {
 }
 database_info = {
   db_subnet_group_name = "ntier-db"
+  db_name              = "sureshempdatabase"
+  db_engine            = "mysql"
+  db_engine_version    = "8.0.33"
+  db_instance_class    = "db.t3.micro"
 }

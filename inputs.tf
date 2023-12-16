@@ -14,6 +14,7 @@ variable "ntier_vpc_info" {
     private_subnets = list(string)
     public_subnets  = list(string)
     db_subnets      = list(string)
+    web_subnet      = string
   })
   default = {
     vpc_name        = "ntier"
@@ -24,6 +25,7 @@ variable "ntier_vpc_info" {
     private_subnets = ["app1", "app2", "db1", "db2"]
     public_subnets  = []
     db_subnets      = ["db1", "db2"]
+    web_subnet      = "web1"
   }
 }
 

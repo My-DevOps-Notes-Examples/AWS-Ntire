@@ -42,3 +42,14 @@ data "aws_ami_ids" "ubuntu_2204" {
     values = ["true"]
   }
 }
+
+data "aws_subnet" "web" {
+  filter {
+    name   = "tag:Name"
+    values = [var.ntier_vpc_info.web_subnet]
+  }
+
+  depends_on = [
+    aws_subnet.subnets
+  ]
+}

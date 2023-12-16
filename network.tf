@@ -32,3 +32,32 @@ resource "aws_internet_gateway" "ntier_igw" {
     aws_subnet.subnets
   ]
 }
+
+resource "aws_route_table" "private" {
+  vpc_id = local.vpc_id
+
+  tags = {
+    Name = "private"
+  }
+
+  depends_on = [
+    aws_subnet.subnets,
+    aws_internet_gateway.ntier_igw
+  ]
+}
+
+resource "aws_route_table" "public" {
+  vpc_id = local.vpc_id
+  route {
+    cidr_block = local.anywhere
+    gateway_id = aws_internet_gateway.ntier_igw.id
+  }
+
+  tags = {
+    Name = "public"
+  }
+
+  depends_on = [
+    aws_internet_gateway.ntier_igw
+  ]
+}

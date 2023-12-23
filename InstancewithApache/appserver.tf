@@ -29,3 +29,17 @@ resource "aws_security_group" "appserver_sg" {
     aws_vpc.appserver-vpc
   ]
 }
+
+resource "aws_instance" "apache_server" {
+  ami                         = data.aws_ami_ids.ubuntu_2204.ids[0]
+  associate_public_ip_address = true
+  instance_type               = "t2.micro"
+  key_name                    = "terraform"
+  vpc_security_group_ids      = [aws_security_group.appserver_sg.id]
+  subnet_id                   = data.aws_subnet.apache_server_subnet.id
+  user_data                   = file("apache.sh")
+
+  tags = {
+    Name = "apache-server"
+  }
+}

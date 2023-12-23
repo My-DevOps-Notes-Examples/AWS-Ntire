@@ -23,3 +23,21 @@ variable "vpc_info" {
     public_subnets  = ["web1", "web2"]
   }
 }
+
+
+variable "server_security_group" {
+  type = object({
+    name        = string
+    description = string
+    port_80     = number
+    port_22     = number
+    protocol    = string
+  })
+  default = {
+    name        = "server-sg"
+    description = "open 22 & 80"
+    port_80     = 80
+    port_22     = 22
+    protocol    = "tcp"
+  }
+}
